@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "portfolio-jay",
@@ -13,12 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body
         className="antialiased dark:bg-neutral-950 bg-neutral-50"
       >
-        <Navbar/>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <Navbar/>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

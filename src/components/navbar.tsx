@@ -4,6 +4,7 @@ import Container from "./container";
 import Link from "next/link";
 import { motion } from "motion/react";
 import Image from "next/image";
+import Theme from "./theme";
 function Navbar() {
   const navItems = [
     { name: "Projects", href: "/projects" },
@@ -15,7 +16,7 @@ function Navbar() {
   const [hoveredLink, setHoveredLink] = useState<number | null>(null);
   const MotionImage = motion.create(Image);
   return (
-    <Container className="fixed top-3 right-0 left-0 w-fit rounded-full border border-neutral-500 bg-neutral-50/50 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl md:absolute dark:bg-neutral-900/50 z-[99999]">
+    <Container className="fixed top-3 right-0 left-0 z-[99999] w-fit rounded-full border border-neutral-500 bg-neutral-50/50 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl md:absolute dark:bg-neutral-900/50">
       <nav className="flex items-center justify-between gap-4 p-2">
         <Link href="/">
           <MotionImage
@@ -32,13 +33,13 @@ function Navbar() {
             className="rounded-full border border-neutral-500"
           />
         </Link>
-        <div className="flex items-center">
+        <div className="flex items-center divide-x divide-neutral-500">
           {navItems.map((item, idx) => {
             return (
               <Link
                 href={item.href}
                 key={idx}
-                className="relative inline-block rounded-md px-2 py-1"
+                className="relative inline-block px-2 py-1"
                 onMouseEnter={() => setHoveredLink(idx)}
                 onMouseLeave={() => setHoveredLink(null)}
                 // onClick={() => setHoveredLink(null)}
@@ -62,6 +63,9 @@ function Navbar() {
               </Link>
             );
           })}
+        </div>
+        <div>
+          <Theme/>
         </div>
       </nav>
     </Container>
